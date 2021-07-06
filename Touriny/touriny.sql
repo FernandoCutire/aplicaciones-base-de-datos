@@ -94,13 +94,13 @@ CREATE TABLE booking (id_booking NUMBER NOT NULL,
 -- Table booking_tours
 -- -----------------------------------------------------
 CREATE TABLE booking_tours (booking_id_booking NUMBER NOT NULL,
-  tours_id_tours NUMBER NOT NULL,
-  PRIMARY KEY (booking_id_booking, tours_id_tours),
+  tours_id_tours1 NUMBER NOT NULL,
+  PRIMARY KEY (booking_id_booking, tours_id_tours1),
   CONSTRAINT fk_booking1
     FOREIGN KEY (booking_id_booking)
     REFERENCES booking (id_booking),
   CONSTRAINT fk_tours1
-    FOREIGN KEY (tours_id_tours)
+    FOREIGN KEY (tours_id_tours1)
     REFERENCES tours (id_tours)
 );
 
@@ -118,12 +118,12 @@ CREATE TABLE destinos (id_destinos NUMBER NOT NULL,
 -- -----------------------------------------------------
 CREATE TABLE destinos_tours (
   destinos_id_destinos NUMBER NOT NULL,
-  tours_id_tours NUMBER NOT NULL,
-  PRIMARY KEY (destinos_id_destinos, tours_id_tours),
+  tours_id_tours2 NUMBER NOT NULL,
+  PRIMARY KEY (destinos_id_destinos, tours_id_tours2),
   CONSTRAINT fk_tours_destinos1
     FOREIGN KEY (destinos_id_destinos)
     REFERENCES destinos (id_destinos),
   CONSTRAINT fk_destinos_tours1
-    FOREIGN KEY (tours_id_tours)
+    FOREIGN KEY (tours_id_tours2)
     REFERENCES tours (id_tours)
 );
