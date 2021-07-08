@@ -1,4 +1,17 @@
+/* CREACION DE USUARIOS */
 
+GRANT CREATE SESSION TO miusuario;
+
+CREATE USER usuario IDENTIFIED BY contrasena;
+
+/* CREACION DE USUARIOS */
+CREATE USER usuario IDENTIFIED BY contrasena;
+/*CONCEDER PERMISOS*/
+GRANT CONNECT TO usuario;
+GRANT RESOURCE TO usuario;
+GRANT CREATE VIEW TO usuario;
+/* OTROS PERMISOS
+GRANT SELECT, INSERT, UPDATE, DELETE ON Table_name TO usuario;*/
 -- -----------------------------------------------------
 -- Schema touriny_db
 -- -----------------------------------------------------
@@ -127,3 +140,5 @@ CREATE TABLE destinos_tours (
     FOREIGN KEY (tours_id_tours2)
     REFERENCES tours (id_tours)
 );
+
+
