@@ -96,7 +96,6 @@ CREATE TABLE tours (id_tours NUMBER NOT NULL,
 CREATE TABLE booking (id_booking NUMBER NOT NULL,
   fecha_booking DATE NOT NULL,
   id_cliente NUMBER NOT NULL,
-  id_status NUMBER NOT NULL,
   CONSTRAINT pk_id_booking PRIMARY KEY (id_booking),
   CONSTRAINT fk_id_cliente
     FOREIGN KEY (id_cliente)

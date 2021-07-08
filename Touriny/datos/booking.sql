@@ -1,0 +1,1 @@
+/*booking (id_booking, fecha_booking, id_cliente ) */
