@@ -96,9 +96,6 @@ CREATE TABLE booking (id_booking NUMBER NOT NULL,
   id_cliente NUMBER NOT NULL,
   id_status NUMBER NOT NULL,
   CONSTRAINT pk_id_booking PRIMARY KEY (id_booking),
-  CONSTRAINT fk_id_status
-    FOREIGN KEY (id_status)
-    REFERENCES estado (id_status),
   CONSTRAINT fk_id_cliente
     FOREIGN KEY (id_cliente)
     REFERENCES cliente (id_cliente)
