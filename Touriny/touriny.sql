@@ -29,17 +29,20 @@ CREATE TABLE pais (id_pais NUMBER NOT NULL,
 CREATE TABLE cliente (id_cliente NUMBER NOT NULL,
   dni VARCHAR2(45) NOT NULL,
   nombre1 VARCHAR2(45) NOT NULL,
-  nombre2 VARCHAR2(45) NOT NULL,
+  nombre2 VARCHAR2(45),
   apellido1 VARCHAR2(45) NOT NULL,
-  apellido2 VARCHAR2(45) NOT NULL,
+  apellido2 VARCHAR2(45),
   email VARCHAR2(45) NOT NULL,
   telefono VARCHAR2(45) NOT NULL,
   edad VARCHAR2(45) NOT NULL,
   cod_pais NUMBER NOT NULL,
-  ciudad VARCHAR2(45) NOT NULL,
   CONSTRAINT pk_id_cliente PRIMARY KEY (id_cliente),
-  CONSTRAINT fk_cod_pais FOREIGN KEY (cod_pais) REFERENCES pais (id_pais)
+  CONSTRAINT fk_cod_pais 
+    FOREIGN KEY (cod_pais) 
+    REFERENCES pais (id_pais)
 );
+
+
 
 
 -- -----------------------------------------------------
@@ -56,7 +59,11 @@ CREATE TABLE guia (id_guia NUMBER NOT NULL,
   CONSTRAINT pk_id_guia PRIMARY KEY (id_guia)
   );
 
-
+----TABLE DIFUCULTAD-----
+CREATE TABLE dificultad (id_dificultad NUMBER NOT NULL,
+  descripcion VARCHAR2(45) NOT NULL,
+  CONSTRAINT pk_id_dificultad PRIMARY KEY (id_dificultad)
+  );
 -- -----------------------------------------------------
 -- Table tours
 -- -----------------------------------------------------
@@ -67,23 +74,18 @@ CREATE TABLE tours (id_tours NUMBER NOT NULL,
   duracion NUMBER NOT NULL,
   descripcion VARCHAR2(250) NOT NULL,
   precio VARCHAR2(45) NOT NULL,
-  dificultad NUMBER NOT NULL,
+  id_dificultad NUMBER NOT NULL,
   cod_destino NUMBER NOT NULL,
   id_guia NUMBER NOT NULL,
   CONSTRAINT pk_id_tours PRIMARY KEY (id_tours),
+  CONSTRAINT fk_id_dificultad
+    FOREIGN KEY (id_dificultad)
+    REFERENCES dificultad (id_dificultad),
   CONSTRAINT fk_id_guia
     FOREIGN KEY (id_guia)
     REFERENCES guia (id_guia)
 );
 
-
--- ----------------------------------------------------
--- Table estado
--- -----------------------------------------------------
-CREATE TABLE estado (id_status NUMBER NOT NULL,
-  descripcion VARCHAR2(45) NOT NULL,
-  CONSTRAINT pk_id_status PRIMARY KEY (id_status)
-  );
 
 
 -- -----------------------------------------------------
