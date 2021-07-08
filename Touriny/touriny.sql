@@ -34,7 +34,7 @@ CREATE TABLE cliente (id_cliente NUMBER NOT NULL,
   apellido2 VARCHAR2(45),
   email VARCHAR2(45) NOT NULL,
   telefono VARCHAR2(45) NOT NULL,
-  edad VARCHAR2(45) NOT NULL,
+  edad number NOT NULL,
   cod_pais NUMBER NOT NULL,
   CONSTRAINT pk_id_cliente PRIMARY KEY (id_cliente),
   CONSTRAINT fk_cod_pais 
@@ -54,7 +54,7 @@ CREATE TABLE guia (id_guia NUMBER NOT NULL,
   apellido1 VARCHAR2(45) NOT NULL,
   email VARCHAR2(45) NOT NULL,
   telefono VARCHAR2(45) NOT NULL,
-  edad VARCHAR2(45) NOT NULL,
+  edad number NOT NULL,
   ciudad VARCHAR2(45) NOT NULL,
   CONSTRAINT pk_id_guia PRIMARY KEY (id_guia)
   );
@@ -96,9 +96,6 @@ CREATE TABLE booking (id_booking NUMBER NOT NULL,
   id_cliente NUMBER NOT NULL,
   id_status NUMBER NOT NULL,
   CONSTRAINT pk_id_booking PRIMARY KEY (id_booking),
-  CONSTRAINT fk_id_status
-    FOREIGN KEY (id_status)
-    REFERENCES estado (id_status),
   CONSTRAINT fk_id_cliente
     FOREIGN KEY (id_cliente)
     REFERENCES cliente (id_cliente)
