@@ -72,7 +72,7 @@ CREATE TABLE tours (id_tours NUMBER NOT NULL,
   tour_nombre VARCHAR2(45) NOT NULL,
   duracion NUMBER NOT NULL,
   descripcion VARCHAR2(250) NOT NULL,
-  precio VARCHAR2(45) NOT NULL,
+  precio number NOT NULL,
   cantidad_cupos number not null,
   id_dificultad NUMBER NOT NULL,
   /*cod_destino NUMBER NOT NULL,*/
