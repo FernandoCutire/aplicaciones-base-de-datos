@@ -70,8 +70,6 @@ CREATE TABLE dificultad (id_dificultad NUMBER NOT NULL,
 -- -----------------------------------------------------
 CREATE TABLE tours (id_tours NUMBER NOT NULL,
   tour_nombre VARCHAR2(45) NOT NULL,
-  fecha_inicio DATE NOT NULL,
-  fecha_fin DATE NOT NULL,
   duracion NUMBER NOT NULL,
   descripcion VARCHAR2(250) NOT NULL,
   precio VARCHAR2(45) NOT NULL,
@@ -108,6 +106,8 @@ CREATE TABLE booking (id_booking NUMBER NOT NULL,
 -- -----------------------------------------------------
 CREATE TABLE booking_tours (booking_id_booking NUMBER NOT NULL,
   tours_id_tours1 NUMBER NOT NULL,
+  fecha_inicio DATE NOT NULL,
+  fecha_fin DATE NOT NULL,
   PRIMARY KEY (booking_id_booking, tours_id_tours1),
   CONSTRAINT fk_booking1
     FOREIGN KEY (booking_id_booking)
