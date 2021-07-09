@@ -75,7 +75,7 @@ CREATE TABLE tours (id_tours NUMBER NOT NULL,
   precio VARCHAR2(45) NOT NULL,
   cantidad_cupos number not null,
   id_dificultad NUMBER NOT NULL,
-  cod_destino NUMBER NOT NULL,
+  /*cod_destino NUMBER NOT NULL,*/
   id_guia NUMBER NOT NULL,
   CONSTRAINT pk_id_tours PRIMARY KEY (id_tours),
   CONSTRAINT fk_id_dificultad
