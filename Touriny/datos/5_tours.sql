@@ -1,6 +1,6 @@
 /* TOURS (id_tour, nombre, duracion , descripcion, precio , cantidad_cupos , id_dificultad, id_guia )*/
 
-INSERT INTO TOURS VALUES (1,'city tour & the panama canal',6,'Conoce los mejores lugares en la ciudad de Panamá',67,20,1,1);
+INSERT INTO TOURS VALUES (1,'city tour and the panama canal',6,'Conoce los mejores lugares en la ciudad de Panamá',67,20,1,1);
 INSERT INTO TOURS VALUES (2,'tour privado centro historico de panama',8,'La historia de Panamá en un tour',100,5,1,2);
 INSERT INTO TOURS VALUES (3,'Ven a san blas',16,'Las maravillas de la isla san blas',89,30,2,3);
 INSERT INTO TOURS VALUES (4,'portobelo y las del caribe de panama',12,'Sé parte de la experiencia de Colón y el caribe panameño',90,15,1,4);
