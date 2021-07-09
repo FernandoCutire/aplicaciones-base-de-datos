@@ -1,2 +1,20 @@
-INSERT INTO cliente VALUES (8977, 'E-862826', 'Boris', 'Nelson', 'Flores', 'Mendoza', 'BORIS9067@MAIL.COM', '6879-2546', 22, 4, 158 )
-
+INSERT INTO cliente VALUES (8977, 'E-862826', 'Boris', 'Nelson', 'Flores', 'Mendoza', 'boris9067@mail.com', '6879-2546', 22, 4, 158 );
+INSERT INTO cliente VALUES (10009, '94830605761020', 'Juan', 'Antonio', 'Zelaya', 'Martinez', 'juan8977@mail.com', '6788-1444', 36, 1, 164);
+INSERT INTO cliente VALUES (9208, '942410439', 'Jorge', 'Ignacio', 'Molina', 'Rodriguez', 'jorge9235@mail.com', '6979-1245', 19, 36, 164 );
+INSERT INTO cliente VALUES (9274, '900620628', 'Patricia', 'Lucia', 'Centeno', 'Jimenez', 'patricia9333@mail.com', '67891987', 45, 2, 4);
+INSERT INTO cliente VALUES (14292, 'M63563543093', 'Jorge', 'Elias', 'Velasco', 'Micopulus', 'jorge14448@mail.com', '17534855', 67, 0, 64);
+INSERT INTO cliente VALUES (15323, 'CR-814003624', 'Rosa', 'Esther', 'Espinales', 'Zavala', 'rosa15332@mail.com', '87468974', 34, 2, 47);
+INSERT INTO cliente VALUES (16125, 'A161585229010', 'Martha', 'Lorena', 'Obregon', 'Morales', 'martha16128@mail.com', '35794781', 24, 3, 164);
+INSERT INTO cliente VALUES (16836, '1808200500692', 'Daniel', '', 'Franco', 'Mojica', 'daniel16837@mail.com', '67884673', 29, 1, 47);
+INSERT INTO cliente VALUES (17031, '800740577', 'Luis', 'Mariano', 'Rodriguez', '', 'luis17047@mail.com', '87467246', 24, 6, 221); 
+INSERT INTO cliente VALUES (17782, '811307502', 'Miguel', 'Alexander', 'Gonzalez', 'Rizo', 'wilmer17796@mail.com', '97843314', 29, 2, 156); 
+INSERT INTO cliente VALUES (10223, '809374702', 'Juan', 'Rolando', 'Ojeda', 'Baez', 'juan10223@mail.com', '62817766', 34, 3, 156);
+INSERT INTO cliente VALUES (12758, '8383813', 'Diva', '', 'De', 'Olivera', 'diva12773@mail.com','64378256', 23, 1, 164);
+INSERT INTO cliente VALUES (15311, '88251868', 'Pedro', 'Irvin', 'Llovel', 'Alvarez', 'pedro15318@mail.com', '62395450', 25, 2, 164);
+INSERT INTO cliente VALUES (16069, 'E139973', 'Mario', 'Emilio', 'Soto', 'Averholf', 'mario16125@mail.com', '65674323', 47, 4, 164);
+INSERT INTO cliente VALUES (18895, '901060240', 'Rodrigo', '', 'Gutierrez', 'Llanes', 'rodrigo18898@mail.com', '234585943', 27, 3, 47);
+INSERT INTO cliente VALUES (20176, '800750257', 'Alberto', '', 'Martin', 'Enrique', 'alberto20179@mail.com', '943245643', 29, 2, 47);
+INSERT INTO cliente VALUES (21003, 'CI2032509931', 'Cesar', 'Bernabel', 'Gonzalez', 'Torres', 'cesar21004@mail.com', '945323763', 31, 2, 47);
+INSERT INTO cliente VALUES (22049, 'CI502800148', 'Ivi', '', 'Sotomayor', 'Alpizar', 'ivi22051@mail.com', '4332354234', 36, 5, 93);
+INSERT INTO cliente VALUES (24352, '815997431', 'Elvin', 'Jose', 'Pastor', 'Peña', 'elvin24360@mail.com', '3234525422', 47, 4, 156);
+INSERT INTO cliente VALUES (21032, 'H312695', 'Maximo', '', 'Castillo', 'Gaitan', 'maximo21034@mail.com', '23434132', 19, 3, 48);
