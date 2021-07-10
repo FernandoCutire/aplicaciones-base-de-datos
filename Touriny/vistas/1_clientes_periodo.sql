@@ -5,7 +5,7 @@ SELECT
     SUM(CASE WHEN extract(quarter from fecha_booking) = 2) AS "Segundo Cuatrimestre",
     SUM(CASE WHEN extract(quarter from fecha_booking) = 3) AS "Tercer Cuatrimestre",
     SUM(CASE WHEN extract(quarter from fecha_booking) = 4) AS "Cuarto Cuatrimestre"
- FROM booking;
+ FROM BOOKING;
 
 
 /*
