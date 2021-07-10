@@ -35,7 +35,6 @@ CREATE TABLE CLIENTES (id_cliente NUMBER NOT NULL,
   email VARCHAR2(45) NOT NULL,
   telefono VARCHAR2(45) NOT NULL,
   edad number NOT NULL,
-  cantidad_personas number default 0,
   cod_pais NUMBER NOT NULL,
   CONSTRAINT pk_id_cliente PRIMARY KEY (id_cliente),
   CONSTRAINT fk_cod_pais 
@@ -93,6 +92,7 @@ CREATE TABLE TOURS (id_tours NUMBER NOT NULL,
 CREATE TABLE BOOKING (id_booking NUMBER NOT NULL,
   fecha_booking DATE NOT NULL,
   id_cliente NUMBER NOT NULL,
+  cantidad_personas number default 0,
   CONSTRAINT pk_id_booking PRIMARY KEY (id_booking),
   CONSTRAINT fk_id_cliente
     FOREIGN KEY (id_cliente)
