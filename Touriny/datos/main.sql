@@ -492,6 +492,8 @@ INSERT INTO TOURS VALUES (8, 'Ven a Bocas del Toro', 20, 'Playas, buen clima, re
 INSERT INTO TOURS VALUES (9, 'La isla de las flores', 9, 'La isla de las flores tiene mucho que ofrecer a sus clientes', 150, 15, 2, 4);
 INSERT INTO TOURS VALUES (10, 'El Archipielago de las Perlas', 6, 'El archipielago de las Perlas da una gran experiencia para la familia', 80, 12, 1, 5);
 
+
+
 -----BOOKING---
 INSERT INTO BOOKING VALUES (1,TO_DATE('02-01-2019','DD-MM-YYYY'), 9333, 1);
 INSERT INTO BOOKING VALUES (2,TO_DATE('03-01-2019','DD-MM-YYYY'), 10020, 2);
