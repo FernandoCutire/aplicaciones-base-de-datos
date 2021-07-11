@@ -1,16 +1,6 @@
-SELECT
-    SUM(CASE WHEN extract(day_of_week from fecha_booking) = 'Monday' ) AS "Lunes",
-    SUM(CASE WHEN extract(day_of_week from fecha_booking) = 'Tuesday') AS "Martes",
-    SUM(CASE WHEN extract(day_of_week from fecha_booking) = 'Wednesday') AS "Miércoles",
-    SUM(CASE WHEN extract(day_of_week from fecha_booking) = 'Thursday') AS "Jueves"
-    SUM(CASE WHEN extract(day_of_week from fecha_booking) = 'Friday') AS "Viernes"
- FROM BOOKING;
 
+SELECT TO_CHAR(fecha_booking, 'DAY'), COUNT(fecha_booking) FROM booking
+GROUP BY TO_CHAR(fecha_booking, 'DAY') 
+ORDER BY TO_CHAR(fecha_booking, 'DAY');
 
-
-
-SELECT
-  EXTRACT(DAY_OF_WEEK FROM fecha_booking) as "Dia", 
-  COUNT(fecha_booking) as "Número de Reservaciones"
-  FROM BOOKING;
   
