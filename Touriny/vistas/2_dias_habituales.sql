@@ -7,6 +7,10 @@ SELECT
  FROM BOOKING;
 
 
-select extract <day_of_week from fecha_booking> as dias from BOOKING;
 
-select EXTRACT("TimeStamp", DAY_OF_WEEK)
+
+SELECT
+  EXTRACT(DAY_OF_WEEK FROM fecha_booking) as "Dia", 
+  COUNT(fecha_booking) as "Número de Reservaciones"
+  FROM BOOKING;
+  
