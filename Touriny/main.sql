@@ -1,3 +1,198 @@
+-- -----------------------------------------------------
+-- Table pais
+-- -----------------------------------------------------
+CREATE TABLE PAIS (id_pais NUMBER NOT NULL,
+  pais_nombre VARCHAR2(45) NOT NULL,
+  CONSTRAINT pk_id_pais PRIMARY KEY (id_pais)
+  );
+
+-- -----------------------------------------------------
+-- Table cliente
+-- -----------------------------------------------------
+CREATE TABLE CLIENTES (id_cliente NUMBER NOT NULL,
+  dni VARCHAR2(45) NOT NULL,
+  nombre1 VARCHAR2(45) NOT NULL,
+  nombre2 VARCHAR2(45),
+  apellido1 VARCHAR2(45) NOT NULL,
+  apellido2 VARCHAR2(45),
+  email VARCHAR2(45) NOT NULL,
+  telefono VARCHAR2(45) NOT NULL,
+  edad number NOT NULL,
+  cod_pais NUMBER NOT NULL,
+  CONSTRAINT pk_id_cliente PRIMARY KEY (id_cliente),
+  CONSTRAINT fk_cod_pais 
+    FOREIGN KEY (cod_pais) 
+    REFERENCES PAIS (id_pais)
+);
+
+
+
+
+-- -----------------------------------------------------
+-- Table guia
+-- -----------------------------------------------------
+CREATE TABLE GUIAS (id_guia NUMBER NOT NULL,
+  dni VARCHAR2(45) NOT NULL,
+  nombre1 VARCHAR2(45) NOT NULL,
+  apellido1 VARCHAR2(45) NOT NULL,
+  email VARCHAR2(45) NOT NULL,
+  telefono VARCHAR2(45) NOT NULL,
+  edad number NOT NULL,
+  ciudad VARCHAR2(45) NOT NULL,
+  CONSTRAINT pk_id_guia PRIMARY KEY (id_guia)
+  );
+
+----TABLE DIFUCULTAD-----
+CREATE TABLE DIFICULTAD (id_dificultad NUMBER NOT NULL,
+  descripcion VARCHAR2(45) NOT NULL,
+  CONSTRAINT pk_id_dificultad PRIMARY KEY (id_dificultad)
+  );
+-- -----------------------------------------------------
+-- Table tours
+-- -----------------------------------------------------
+CREATE TABLE TOURS (id_tours NUMBER NOT NULL,
+  tour_nombre VARCHAR2(45) NOT NULL,
+  duracion NUMBER NOT NULL,
+  descripcion VARCHAR2(250) NOT NULL,
+  precio number NOT NULL,
+  cantidad_cupos number not null,
+  id_dificultad NUMBER NOT NULL,
+  id_guia NUMBER NOT NULL,
+  CONSTRAINT pk_id_tours PRIMARY KEY (id_tours),
+  CONSTRAINT fk_id_dificultad
+    FOREIGN KEY (id_dificultad)
+    REFERENCES DIFICULTAD (id_dificultad),
+  CONSTRAINT fk_id_guia
+    FOREIGN KEY (id_guia)
+    REFERENCES GUIAS (id_guia)
+);
+
+
+
+-- -----------------------------------------------------
+-- Table booking
+-- -----------------------------------------------------
+CREATE TABLE BOOKING (id_booking NUMBER NOT NULL,
+  fecha_booking DATE NOT NULL,
+  id_cliente NUMBER NOT NULL,
+  cantidad_personas number default 0,
+  CONSTRAINT pk_id_booking PRIMARY KEY (id_booking),
+  CONSTRAINT fk_id_cliente
+    FOREIGN KEY (id_cliente)
+    REFERENCES CLIENTES (id_cliente)
+);
+
+
+-- -----------------------------------------------------
+-- Table booking_tours
+-- -----------------------------------------------------
+CREATE TABLE BOOKING_TOURS (booking_id_booking NUMBER NOT NULL,
+  tours_id_tours1 NUMBER NOT NULL,
+  fecha_inicio DATE NOT NULL,
+  fecha_fin DATE NOT NULL,
+  PRIMARY KEY (booking_id_booking, tours_id_tours1),
+  CONSTRAINT fk_booking1
+    FOREIGN KEY (booking_id_booking)
+    REFERENCES BOOKING (id_booking),
+  CONSTRAINT fk_tours1
+    FOREIGN KEY (tours_id_tours1)
+    REFERENCES TOURS (id_tours)
+);
+
+
+-- -----------------------------------------------------
+-- Table destinos
+-- -----------------------------------------------------
+CREATE TABLE DESTINOS (id_destinos NUMBER NOT NULL,
+  destino_nombre VARCHAR2(45) NOT NULL,
+  CONSTRAINT pk_id_destinos PRIMARY KEY (id_destinos)
+);
+
+-- -----------------------------------------------------
+-- Table destinos_tours
+-- -----------------------------------------------------
+CREATE TABLE DESTINOS_TOURS (
+  destinos_id_destinos NUMBER NOT NULL,
+  tours_id_tours2 NUMBER NOT NULL,
+  PRIMARY KEY (destinos_id_destinos, tours_id_tours2),
+  CONSTRAINT fk_tours_destinos1
+    FOREIGN KEY (destinos_id_destinos)
+    REFERENCES DESTINOS (id_destinos),
+  CONSTRAINT fk_destinos_tours1
+    FOREIGN KEY (tours_id_tours2)
+    REFERENCES TOURS (id_tours)
+);
+
+
+-----CREACION DE LAS VISTAS----
+
+-- 1 Consultar cuántos clientes reservan por distintos periodos de tiempo.​
+
+ CREATE VIEW VISTA_1_CUATRIMESTRE 
+ AS SELECT TO_CHAR(fecha_booking, 'Q') as "Cuatrimestre", COUNT(fecha_booking) as "Cantidad" FROM booking
+GROUP BY TO_CHAR(fecha_booking, 'Q') 
+ORDER BY TO_CHAR(fecha_booking, 'Q');
+
+
+-- 2 Conocer los dias más habituales de reserva. 
+
+ CREATE VIEW VISTA_2_DIAS_HABITUALES 
+AS SELECT TO_CHAR(fecha_booking, 'DAY') "Día", COUNT(fecha_booking) "Cuenta" FROM booking
+    GROUP BY TO_CHAR(fecha_booking, 'DAY') 
+    ORDER BY TO_CHAR(fecha_booking, 'DAY');
+
+
+-- 3 Identificar al consumidor a partir de la nacionalidad. 
+
+ CREATE VIEW VISTA_3_NACIONALIDADES
+AS SELECT p.pais_nombre, COUNT(c.id_cliente) AS "Cantidad de clientes"
+    FROM PAIS p
+    INNER JOIN CLIENTES c ON c.cod_pais = p.id_pais
+    GROUP BY P.pais_nombre
+    ORDER BY "Cantidad de clientes" DESC;
+
+
+-- 4 Crear paquetes a partir de la cantidad de personas que suelen reservar en grupo.​
+
+ CREATE VIEW VISTA_4_PAQUETES
+AS SELECT
+    SUM(CASE WHEN cantidad_personas BETWEEN 0 AND 1 THEN 1 ELSE 0 END) AS "Paquete Individual",
+    SUM(CASE WHEN cantidad_personas BETWEEN 1 AND 2 THEN 1 ELSE 0 END) AS "Paquete Duo",
+    SUM(CASE WHEN cantidad_personas BETWEEN 3 AND 4 THEN 1 ELSE 0 END) AS "Paquete Tripe",
+    SUM(CASE WHEN cantidad_personas BETWEEN 5 AND 10 THEN 1 ELSE 0 END) AS "Paquete Familiar"
+ FROM booking;
+
+
+-- 5 Establecer los lugares destinos ofrecidos más frecuentados.​
+
+ CREATE VIEW VISTA_5_TOURS_FAVORITOS
+AS Select  t.tour_nombre "Nombre del tour" , COUNT(b.tours_id_tours1) as "Cantidad de bookings"
+FROM tours t
+INNER JOIN booking_tours b 
+ON b.tours_id_tours1 = t.id_tours
+GROUP BY t.tour_nombre
+ORDER BY COUNT(b.tours_id_tours1) DESC;
+
+
+-- 6 Determinar el rango de edades más frecuentes de los clientes. 
+
+ CREATE VIEW VISTA_6_EDADES
+AS SELECT
+    SUM(CASE WHEN edad BETWEEN 18 AND 24 THEN 1 ELSE 0 END) AS "18-24 Años",
+    SUM(CASE WHEN edad BETWEEN 25 AND 54 THEN 1 ELSE 0 END) AS "25-54 Años",
+    SUM(CASE WHEN edad BETWEEN 55 AND 64 THEN 1 ELSE 0 END) AS "55-64 Años",
+    SUM(CASE WHEN edad >65 THEN 1 ELSE 0 END) AS "65+ Años"
+ FROM clientes;
+
+-- 7 Comparar la cantidad de tours de cada guía turístico
+
+ CREATE VIEW VISTA_7_GUIAS_TURISTICOS AS SELECT g.nombre1 "Nombre del Guía" , COUNT(t.id_guia) "Tours"
+FROM Guias g
+    INNER JOIN TOURS t ON g.id_guia = t.id_guia
+    GROUP BY g.nombre1
+    ORDER BY COUNT(t.id_guia) DESC;
+
+
 
 ---- INSERT PARA LAS TABLAS---
 INSERT INTO PAIS VALUES (1, 'Andorra ');
@@ -670,6 +865,4 @@ INSERT INTO DESTINOS_TOURS VALUES (10, 7);
 INSERT INTO DESTINOS_TOURS VALUES (16, 8);
 INSERT INTO DESTINOS_TOURS VALUES (16, 9);
 INSERT INTO DESTINOS_TOURS VALUES (11, 10);
-
-
 
