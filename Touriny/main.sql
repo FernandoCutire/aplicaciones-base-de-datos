@@ -137,15 +137,15 @@ ORDER BY TO_CHAR(fecha_booking, 'Q');
 -- 2 Conocer los dias más habituales de reserva. 
 
  CREATE VIEW VISTA_2_DIAS_HABITUALES 
-AS SELECT TO_CHAR(fecha_booking, 'DAY') "Día", COUNT(fecha_booking) "Cuenta" FROM booking
-    GROUP BY TO_CHAR(fecha_booking, 'DAY') 
-    ORDER BY TO_CHAR(fecha_booking, 'DAY');
+AS SELECT TO_CHAR(fecha_booking, 'DAY') AS "Dia de la semana" , COUNT(fecha_booking) AS "Cantidad" FROM booking
+GROUP BY TO_CHAR(fecha_booking, 'DAY') 
+ORDER BY COUNT(fecha_booking) DESC;
 
 
 -- 3 Identificar al consumidor a partir de la nacionalidad. 
 
  CREATE VIEW VISTA_3_NACIONALIDADES
-AS SELECT p.pais_nombre, COUNT(c.id_cliente) AS "Cantidad de clientes"
+AS SELECT p.pais_nombre AS "País", COUNT(c.id_cliente) AS "Cantidad de clientes"
     FROM PAIS p
     INNER JOIN CLIENTES c ON c.cod_pais = p.id_pais
     GROUP BY P.pais_nombre
@@ -157,16 +157,16 @@ AS SELECT p.pais_nombre, COUNT(c.id_cliente) AS "Cantidad de clientes"
  CREATE VIEW VISTA_4_PAQUETES
 AS SELECT
     SUM(CASE WHEN cantidad_personas BETWEEN 0 AND 1 THEN 1 ELSE 0 END) AS "Paquete Individual",
-    SUM(CASE WHEN cantidad_personas BETWEEN 1 AND 2 THEN 1 ELSE 0 END) AS "Paquete Duo",
-    SUM(CASE WHEN cantidad_personas BETWEEN 3 AND 4 THEN 1 ELSE 0 END) AS "Paquete Tripe",
-    SUM(CASE WHEN cantidad_personas BETWEEN 5 AND 10 THEN 1 ELSE 0 END) AS "Paquete Familiar"
+    SUM(CASE WHEN cantidad_personas BETWEEN 2 AND 2 THEN 1 ELSE 0 END) AS "Paquete Duo",
+    SUM(CASE WHEN cantidad_personas BETWEEN 3 AND 3 THEN 1 ELSE 0 END) AS "Paquete Triple",
+    SUM(CASE WHEN cantidad_personas BETWEEN 4 AND 10 THEN 1 ELSE 0 END) AS "Paquete Familiar"
  FROM booking;
 
 
--- 5 Establecer los lugares destinos ofrecidos más frecuentados.​
+-- 5 Establecer los tours ofrecidos más frecuentados.​
 
  CREATE VIEW VISTA_5_TOURS_FAVORITOS
-AS Select  t.tour_nombre "Nombre del tour" , COUNT(b.tours_id_tours1) as "Cantidad de bookings"
+AS SELECT  t.tour_nombre AS "Nombre del tour" , COUNT(b.tours_id_tours1) AS "Cantidad de bookings"
 FROM tours t
 INNER JOIN booking_tours b 
 ON b.tours_id_tours1 = t.id_tours
@@ -180,8 +180,8 @@ ORDER BY COUNT(b.tours_id_tours1) DESC;
 AS SELECT
     SUM(CASE WHEN edad BETWEEN 18 AND 24 THEN 1 ELSE 0 END) AS "18-24 Años",
     SUM(CASE WHEN edad BETWEEN 25 AND 54 THEN 1 ELSE 0 END) AS "25-54 Años",
-    SUM(CASE WHEN edad BETWEEN 55 AND 64 THEN 1 ELSE 0 END) AS "55-64 Años",
-    SUM(CASE WHEN edad >65 THEN 1 ELSE 0 END) AS "65+ Años"
+    SUM(CASE WHEN edad BETWEEN 55 AND 63 THEN 1 ELSE 0 END) AS "55-63 Años",
+    SUM(CASE WHEN edad BETWEEN 64 AND 105 THEN 1 ELSE 0 END) AS "64+ Años"
  FROM clientes;
 
 -- 7 Comparar la cantidad de tours de cada guía turístico
@@ -539,7 +539,7 @@ INSERT INTO CLIENTES VALUES(14713, '800-99-222', 'KOENISSFEST', 'DE', 'ICAZA', '
 
 ----GUIAS----
 INSERT INTO GUIAS VALUES (1, '8-456-875', 'Fernando', 'Diaz', 'fernando.diaz@outlook.com', '68707239', 20, 'Ciudad de Panamá');
-INSERT INTO GUIAS VALUES (2, '6-916-569', 'Alexander', 'Cañate', 'alexander.canate@outlook.com', '68752699', 25, 'Ciudad de Panamá');
+INSERT INTO GUIAS VALUES (2, '6-916-569', 'Maria', 'Cañate', 'alexander.canate@outlook.com', '68752699', 25, 'Ciudad de Panamá');
 INSERT INTO GUIAS VALUES (3, '2-589-156', 'Jack', 'Salazar', 'jack.salazar@outlook.com', '68707239', 20, 'Ciudad de Panamá');
 INSERT INTO GUIAS VALUES (4, 'N-58-789', 'Thiago', 'Cutire', 'thiago.cutire@outlook.com', '68707239', 25, 'Ciudad de Panamá');
 INSERT INTO GUIAS VALUES (5, '6-789-589', 'Jasmine', 'Cutire', 'jasmine.cutire@outlook.com', '68707239', 20, 'Ciudad de Panamá');
@@ -552,10 +552,10 @@ INSERT INTO dificultad VALUES (3, 'Dificil');
 
 ---TOURS---
 
-INSERT INTO TOURS VALUES (1, 'City Tour and the Panama Canal ', 6, 'Conoce los mejores lugares en la ciudad de Panamá.', 67, 20, 1, 1);
-INSERT INTO TOURS VALUES (2, 'Tour privado centro historico de Panamá', 8, 'La historia de Panamá en un tour.', 100, 5, 1, 2);
+INSERT INTO TOURS VALUES (1, 'Tour de la ciudad y el Canal de Panamá ', 6, 'Conoce los mejores lugares en la ciudad de Panamá.', 67, 20, 1, 1);
+INSERT INTO TOURS VALUES (2, 'Tour privado centro histórico de Panamá', 8, 'La historia de Panamá en un tour.', 100, 5, 1, 2);
 INSERT INTO TOURS VALUES (3, 'Ven a San Blas ', 16, 'Las maravillas de la isla San Blas.', 89, 30, 2, 3);
-INSERT INTO TOURS VALUES (4, 'Portobelo y las del caribe de Panamá.', 12, 'Sé parte de la experiencia de Colón y el caribe panameño.', 90, 15, 1, 4);
+INSERT INTO TOURS VALUES (4, 'Portobelo y destinos del caribe de Panamá', 12, 'Sé parte de la experiencia de Colón y el caribe panameño.', 90, 15, 1, 4);
 INSERT INTO TOURS VALUES (5, 'Ida al Valle de Antón', 10, 'Experimenta el valle de Antón.', 120, 20, 2, 5);
 INSERT INTO TOURS VALUES (6, 'Tour al volcán Barú', 72, 'Un tour al volcán Barú a pie.', 150, 20, 3, 1);
 INSERT INTO TOURS VALUES (7, 'Tour al volcán Barú en 4x4', 48, 'Un tour al volcán Barú.', 200, 10, 2, 2);
