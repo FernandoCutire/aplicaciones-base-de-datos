@@ -186,7 +186,7 @@ AS SELECT
 
 -- 7 Comparar la cantidad de tours de cada guía turístico
 
- CREATE VIEW VISTA_7_GUIAS_TURISTICOS AS SELECT (g.nombre1||' '||g.apellido1) as 'Nombre del guia', COUNT(t.id_guia) "Tours"
+CREATE VIEW VISTA_7_GUIAS_TURISTICOS AS SELECT (g.nombre1||' '||g.apellido1) as GUIA, COUNT(t.id_guia) "Tours"
 FROM Guias g
     INNER JOIN TOURS t ON g.id_guia = t.id_guia
     GROUP BY g.nombre1, g.apellido1
