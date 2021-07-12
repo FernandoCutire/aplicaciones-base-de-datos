@@ -42,7 +42,7 @@ CREATE TABLE GUIAS (id_guia NUMBER NOT NULL,
   CONSTRAINT pk_id_guia PRIMARY KEY (id_guia)
   );
 
-----TABLE DIFUCULTAD-----
+----TABLE DIFICULTAD-----
 CREATE TABLE DIFICULTAD (id_dificultad NUMBER NOT NULL,
   descripcion VARCHAR2(45) NOT NULL,
   CONSTRAINT pk_id_dificultad PRIMARY KEY (id_dificultad)
@@ -561,7 +561,7 @@ INSERT INTO TOURS VALUES (6, 'Tour al volcán Barú', 72, 'Un tour al volcán Ba
 INSERT INTO TOURS VALUES (7, 'Tour al volcán Barú en 4x4', 48, 'Un tour al volcán Barú.', 200, 10, 2, 2);
 INSERT INTO TOURS VALUES (8, 'Ven a Bocas del Toro', 20, 'Playas, buen clima, restaurantes para disfrutar en Bocas del Toro.', 190, 20, 1, 3);
 INSERT INTO TOURS VALUES (9, 'La isla de las Flores', 9, 'La isla de las Flores tiene mucho que ofrecer a sus clientes.', 150, 15, 2, 4);
-INSERT INTO TOURS VALUES (10, 'El Archipielago de las Perlas', 6, 'El Archipielago de las Perlas da una gran experiencia para la familia.', 80, 12, 1, 5);
+INSERT INTO TOURS VALUES (10, 'El Archipiélago de las Perlas', 6, 'El Archipielago de las Perlas da una gran experiencia para la familia.', 80, 12, 1, 5);
 
 
 
