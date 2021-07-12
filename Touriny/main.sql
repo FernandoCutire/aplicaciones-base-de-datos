@@ -186,10 +186,10 @@ AS SELECT
 
 -- 7 Comparar la cantidad de tours de cada guía turístico
 
- CREATE VIEW VISTA_7_GUIAS_TURISTICOS AS SELECT g.nombre1 "Nombre del Guía" , COUNT(t.id_guia) "Tours"
+ CREATE VIEW VISTA_7_GUIAS_TURISTICOS AS SELECT g.nombre1 AS "Nombre del Guía", g.apellido1 AS "apellido" , COUNT(t.id_guia) AS "Tours"
 FROM Guias g
     INNER JOIN TOURS t ON g.id_guia = t.id_guia
-    GROUP BY g.nombre1
+    GROUP BY g.nombre1, g.apellido1
     ORDER BY COUNT(t.id_guia) DESC;
 
 
@@ -539,10 +539,10 @@ INSERT INTO CLIENTES VALUES(14713, '800-99-222', 'KOENISSFEST', 'DE', 'ICAZA', '
 
 ----GUIAS----
 INSERT INTO GUIAS VALUES (1, '8-456-875', 'Fernando', 'Diaz', 'fernando.diaz@outlook.com', '68707239', 20, 'Ciudad de Panamá');
-INSERT INTO GUIAS VALUES (2, '6-916-569', 'Maria', 'Cañate', 'alexander.canate@outlook.com', '68752699', 25, 'Ciudad de Panamá');
+INSERT INTO GUIAS VALUES (2, '6-916-569', 'Serena', 'Cañate', 'alexander.canate@outlook.com', '68752699', 25, 'Ciudad de Panamá');
 INSERT INTO GUIAS VALUES (3, '2-589-156', 'Jack', 'Salazar', 'jack.salazar@outlook.com', '68707239', 20, 'Ciudad de Panamá');
 INSERT INTO GUIAS VALUES (4, 'N-58-789', 'Thiago', 'Cutire', 'thiago.cutire@outlook.com', '68707239', 25, 'Ciudad de Panamá');
-INSERT INTO GUIAS VALUES (5, '6-789-589', 'Jasmine', 'Cutire', 'jasmine.cutire@outlook.com', '68707239', 20, 'Ciudad de Panamá');
+INSERT INTO GUIAS VALUES (5, '6-789-589', 'Estella', 'Cutire', 'jasmine.cutire@outlook.com', '68707239', 20, 'Ciudad de Panamá');
 
 
 ---DIFICULTAD--
@@ -831,19 +831,19 @@ INSERT INTO BOOKING_TOURS VALUES( 100, 8, TO_DATE('01-12-2019','DD-MM-YYYY'), TO
 
 
 -----DESTINOS---
-INSERT INTO DESTINOS VALUES (1,'Canal de Panama');
+INSERT INTO DESTINOS VALUES (1,'Canal de Panamá');
 INSERT INTO DESTINOS VALUES (2,'Biomuseo');
 INSERT INTO DESTINOS VALUES (3,'Casco Antiguo');
-INSERT INTO DESTINOS VALUES (4,'Panama Viejo');
+INSERT INTO DESTINOS VALUES (4,'Panamá Viejo');
 INSERT INTO DESTINOS VALUES (5,'Portobelo');
 INSERT INTO DESTINOS VALUES (6,'San Blas');
 INSERT INTO DESTINOS VALUES (7,'Isla Grande');
-INSERT INTO DESTINOS VALUES (8,'Valle de anton');
-INSERT INTO DESTINOS VALUES (9,'Cerro azul');
-INSERT INTO DESTINOS VALUES (10,'Volcan baru');
-INSERT INTO DESTINOS VALUES (11,'Archipielago de las perlas');
+INSERT INTO DESTINOS VALUES (8,'Valle de Antón');
+INSERT INTO DESTINOS VALUES (9,'Cerro Azul');
+INSERT INTO DESTINOS VALUES (10,'Volcan Barú');
+INSERT INTO DESTINOS VALUES (11,'Archipiélago de las perlas');
 INSERT INTO DESTINOS VALUES (12,'Boquete');
-INSERT INTO DESTINOS VALUES (13,'Cerro ancon');
+INSERT INTO DESTINOS VALUES (13,'Cerro Ancón');
 INSERT INTO DESTINOS VALUES (14,'Punta chame');
 INSERT INTO DESTINOS VALUES (15,'Calzada amador');
 INSERT INTO DESTINOS VALUES (16,'Bocas del Toro');
