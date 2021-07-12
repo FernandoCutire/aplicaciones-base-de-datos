@@ -123,6 +123,77 @@ CREATE TABLE DESTINOS_TOURS (
     REFERENCES TOURS (id_tours)
 );
 
+
+-----CREACION DE LAS VISTAS----
+
+-- 1 Consultar cuántos clientes reservan por distintos periodos de tiempo.​
+
+ CREATE VIEW VISTA_1_CUATRIMESTRE 
+ AS SELECT TO_CHAR(fecha_booking, 'Q') as "Cuatrimestre", COUNT(fecha_booking) as "Cantidad" FROM booking
+GROUP BY TO_CHAR(fecha_booking, 'Q') 
+ORDER BY TO_CHAR(fecha_booking, 'Q');
+
+
+-- 2 Conocer los dias más habituales de reserva. 
+
+ CREATE VIEW VISTA_2_DIAS_HABITUALES 
+AS SELECT TO_CHAR(fecha_booking, 'DAY') "Día", COUNT(fecha_booking) "Cuenta" FROM booking
+    GROUP BY TO_CHAR(fecha_booking, 'DAY') 
+    ORDER BY TO_CHAR(fecha_booking, 'DAY');
+
+
+-- 3 Identificar al consumidor a partir de la nacionalidad. 
+
+ CREATE VIEW VISTA_3_NACIONALIDADES
+AS SELECT p.pais_nombre, COUNT(c.id_cliente) AS "Cantidad de clientes"
+    FROM PAIS p
+    INNER JOIN CLIENTES c ON c.cod_pais = p.id_pais
+    GROUP BY P.pais_nombre
+    ORDER BY "Cantidad de clientes" DESC;
+
+
+-- 4 Crear paquetes a partir de la cantidad de personas que suelen reservar en grupo.​
+
+ CREATE VIEW VISTA_4_PAQUETES
+AS SELECT
+    SUM(CASE WHEN cantidad_personas BETWEEN 0 AND 1 THEN 1 ELSE 0 END) AS "Paquete Individual",
+    SUM(CASE WHEN cantidad_personas BETWEEN 1 AND 2 THEN 1 ELSE 0 END) AS "Paquete Duo",
+    SUM(CASE WHEN cantidad_personas BETWEEN 3 AND 4 THEN 1 ELSE 0 END) AS "Paquete Tripe",
+    SUM(CASE WHEN cantidad_personas BETWEEN 5 AND 10 THEN 1 ELSE 0 END) AS "Paquete Familiar"
+ FROM booking;
+
+
+-- 5 Establecer los lugares destinos ofrecidos más frecuentados.​
+
+ CREATE VIEW VISTA_5_TOURS_FAVORITOS
+AS Select  t.tour_nombre "Nombre del tour" , COUNT(b.tours_id_tours1) as "Cantidad de bookings"
+FROM tours t
+INNER JOIN booking_tours b 
+ON b.tours_id_tours1 = t.id_tours
+GROUP BY t.tour_nombre
+ORDER BY COUNT(b.tours_id_tours1) DESC;
+
+
+-- 6 Determinar el rango de edades más frecuentes de los clientes. 
+
+ CREATE VIEW VISTA_6_EDADES
+AS SELECT
+    SUM(CASE WHEN edad BETWEEN 18 AND 24 THEN 1 ELSE 0 END) AS "18-24 Años",
+    SUM(CASE WHEN edad BETWEEN 25 AND 54 THEN 1 ELSE 0 END) AS "25-54 Años",
+    SUM(CASE WHEN edad BETWEEN 55 AND 64 THEN 1 ELSE 0 END) AS "55-64 Años",
+    SUM(CASE WHEN edad >65 THEN 1 ELSE 0 END) AS "65+ Años"
+ FROM clientes;
+
+-- 7 Comparar la cantidad de tours de cada guía turístico
+
+ CREATE VIEW VISTA_7_GUIAS_TURISTICOS AS SELECT g.nombre1 "Nombre del Guía" , COUNT(t.id_guia) "Tours"
+FROM Guias g
+    INNER JOIN TOURS t ON g.id_guia = t.id_guia
+    GROUP BY g.nombre1
+    ORDER BY COUNT(t.id_guia) DESC;
+
+
+
 ---- INSERT PARA LAS TABLAS---
 INSERT INTO PAIS VALUES (1, 'Andorra ');
 INSERT INTO PAIS VALUES (2, 'Emiratos Árabes Unidos ');
@@ -481,16 +552,16 @@ INSERT INTO dificultad VALUES (3, 'Dificil');
 
 ---TOURS---
 
-INSERT INTO TOURS VALUES (1, 'city tour and the panama canal ', 6, 'Conoce los mejores lugares en la ciudad de Panamá', 67, 20, 1, 1);
-INSERT INTO TOURS VALUES (2, 'tour privado centro historico de panama', 8, 'La historia de Panamá en un tour', 100, 5, 1, 2);
-INSERT INTO TOURS VALUES (3, 'Ven a san blas ', 16, 'Las maravillas de la isla san blas', 89, 30, 2, 3);
-INSERT INTO TOURS VALUES (4, 'portobelo y las del caribe de panama', 12, 'Sé parte de la experiencia de Colón y el caribe panameño', 90, 15, 1, 4);
-INSERT INTO TOURS VALUES (5, 'Ida al Valle de anton', 10, 'Experimenta el valle de anton', 120, 20, 2, 5);
-INSERT INTO TOURS VALUES (6, 'tour al volcan baru ', 72, 'Un tour al volcán barú a pie', 150, 20, 3, 1);
-INSERT INTO TOURS VALUES (7, 'tour al volcan baru en 4x4', 48, 'Un tour al volcán barú', 200, 10, 2, 2);
-INSERT INTO TOURS VALUES (8, 'Ven a Bocas del Toro', 20, 'Playas, buen clima, restaurantes para disfrutar en Bocas del Toro', 190, 20, 1, 3);
-INSERT INTO TOURS VALUES (9, 'La isla de las flores', 9, 'La isla de las flores tiene mucho que ofrecer a sus clientes', 150, 15, 2, 4);
-INSERT INTO TOURS VALUES (10, 'El Archipielago de las Perlas', 6, 'El archipielago de las Perlas da una gran experiencia para la familia', 80, 12, 1, 5);
+INSERT INTO TOURS VALUES (1, 'City Tour and the Panama Canal ', 6, 'Conoce los mejores lugares en la ciudad de Panamá.', 67, 20, 1, 1);
+INSERT INTO TOURS VALUES (2, 'Tour privado centro historico de Panamá', 8, 'La historia de Panamá en un tour.', 100, 5, 1, 2);
+INSERT INTO TOURS VALUES (3, 'Ven a San Blas ', 16, 'Las maravillas de la isla San Blas.', 89, 30, 2, 3);
+INSERT INTO TOURS VALUES (4, 'Portobelo y las del caribe de Panamá.', 12, 'Sé parte de la experiencia de Colón y el caribe panameño.', 90, 15, 1, 4);
+INSERT INTO TOURS VALUES (5, 'Ida al Valle de Antón', 10, 'Experimenta el valle de Antón.', 120, 20, 2, 5);
+INSERT INTO TOURS VALUES (6, 'Tour al volcán Barú', 72, 'Un tour al volcán Barú a pie.', 150, 20, 3, 1);
+INSERT INTO TOURS VALUES (7, 'Tour al volcán Barú en 4x4', 48, 'Un tour al volcán Barú.', 200, 10, 2, 2);
+INSERT INTO TOURS VALUES (8, 'Ven a Bocas del Toro', 20, 'Playas, buen clima, restaurantes para disfrutar en Bocas del Toro.', 190, 20, 1, 3);
+INSERT INTO TOURS VALUES (9, 'La isla de las Flores', 9, 'La isla de las Flores tiene mucho que ofrecer a sus clientes.', 150, 15, 2, 4);
+INSERT INTO TOURS VALUES (10, 'El Archipielago de las Perlas', 6, 'El Archipielago de las Perlas da una gran experiencia para la familia.', 80, 12, 1, 5);
 
 
 

@@ -1,7 +1,7 @@
 -- 1 Consultar cuántos clientes reservan por distintos periodos de tiempo.​
 
  CREATE VIEW VISTA_1_CUATRIMESTRE 
- AS SELECT TO_CHAR(fecha_booking, 'Q') as "Cuatrimestre", COUNT(fecha_booking) as "Cont" FROM booking
+ AS SELECT TO_CHAR(fecha_booking, 'Q') as "Cuatrimestre", COUNT(fecha_booking) as "Cantidad" FROM booking
 GROUP BY TO_CHAR(fecha_booking, 'Q') 
 ORDER BY TO_CHAR(fecha_booking, 'Q');
 
@@ -58,7 +58,7 @@ AS SELECT
 
 -- 7 Comparar la cantidad de tours de cada guía turístico
 
- CREATE VIEW VISTA_7_GUIAS_TURISTICOS AS SELECT g.nombre1 "Nombre del Guia" , COUNT(t.id_guia) "Tours"
+ CREATE VIEW VISTA_7_GUIAS_TURISTICOS AS SELECT g.nombre1 "Nombre del Guía" , COUNT(t.id_guia) "Tours"
 FROM Guias g
     INNER JOIN TOURS t ON g.id_guia = t.id_guia
     GROUP BY g.nombre1
