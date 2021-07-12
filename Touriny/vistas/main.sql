@@ -26,7 +26,7 @@ AS SELECT p.pais_nombre, COUNT(c.id_cliente) AS "Cantidad de clientes"
 
 -- 4 Crear paquetes a partir de la cantidad de personas que suelen reservar en grupo.​
 
- CREATE VIEW VIEW4_PAQUETES
+ CREATE VIEW VISTA_4_PAQUETES
 AS SELECT
     SUM(CASE WHEN cantidad_personas BETWEEN 0 AND 1 THEN 1 ELSE 0 END) AS "Paquete Individual",
     SUM(CASE WHEN cantidad_personas BETWEEN 1 AND 2 THEN 1 ELSE 0 END) AS "Paquete Duo",
@@ -37,10 +37,18 @@ AS SELECT
 
 -- 5 Establecer los lugares destinos ofrecidos más frecuentados.​
 
+ CREATE VIEW VISTA_5_TOURS_FAVORITOS
+AS Select  t.tour_nombre "Nombre del tour" , COUNT(b.tours_id_tours1) as "Cantidad de bookings"
+FROM tours t
+INNER JOIN booking_tours b 
+ON b.tours_id_tours1 = t.id_tours
+GROUP BY t.tour_nombre
+ORDER BY COUNT(b.tours_id_tours1) DESC;
+
 
 -- 6 Determinar el rango de edades más frecuentes de los clientes. 
 
- CREATE VIEW VIEW_6_EDADES
+ CREATE VIEW VISTA_6_EDADES
 AS SELECT
     SUM(CASE WHEN edad BETWEEN 18 AND 24 THEN 1 ELSE 0 END) AS "18-24 Años",
     SUM(CASE WHEN edad BETWEEN 25 AND 54 THEN 1 ELSE 0 END) AS "25-54 Años",
